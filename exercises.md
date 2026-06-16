@@ -226,22 +226,35 @@ Rubric scoring 1–5 cho domain **AI/ML & RAG assistant**:
 
 ---
 
-### Exercise 3.4 — Framework Comparison (Bonus)
+### Exercise 3.4 — Framework Comparison (Bonus, +10) ✅
 
-So sánh **RAGAS** vs **DeepEval** (khái niệm — lab dùng heuristic word-overlap thay cho LLM thật):
+So sánh **RAGAS-style** vs **DeepEval-style** chạy **thật** trên cùng 20-case dataset, cùng
+agent (`scripts/compare_frameworks.py` → `reports/framework_comparison.json`). Cả hai chạy
+offline (không cần API key): RAGAS-style = token-set overlap (evaluator đã chấm điểm trong
+lab); DeepEval-style = assertion-based dùng `difflib.SequenceMatcher` (character-sequence
+similarity) — mô phỏng đúng *triết lý chấm* của hai framework, không phải pip package thật.
 
-| Tiêu chí | Framework 1: RAGAS | Framework 2: DeepEval |
-|----------|-------------------|-----------------------|
+| Tiêu chí | Framework 1: RAGAS-style | Framework 2: DeepEval-style |
+|----------|--------------------------|-----------------------------|
 | Setup complexity | Trung bình — cần dataset (question/answer/contexts/ground_truth) | Thấp — pytest-native, viết test như unit test |
 | Metrics available | Faithfulness, Answer Relevancy, Context Recall/Precision (chuẩn RAG) | Faithfulness, Answer Relevancy, Hallucination, Bias, Toxicity, G-Eval tuỳ biến |
 | CI/CD integration | Custom script + threshold check | `deepeval test run` chạy thẳng trong GitHub Actions như test |
-| Score cho cùng dataset | Trên dataset lab (heuristic): pass rate 15%, avg faithfulness 0.32 | Tương tự về xu hướng; assertion-based nên cho pass/fail rõ ràng hơn |
-| Insight rút ra | Mạnh cho phân tích retrieval (tách recall/precision) | Mạnh cho gate CI/CD và safety metrics |
+| **Avg Faithfulness (cùng dataset)** | **0.318** | **0.447** |
+| **Avg Relevance** | **0.266** | **0.352** |
+| **Avg Completeness** | **0.689** | **0.762** |
+| **Pass rate (ngưỡng 0.5)** | **15%** | **5%** |
+| Insight rút ra | Mạnh cho phân tích retrieval (tách recall/precision) | Strict hơn, mạnh cho gate CI/CD và safety |
 
-**Câu hỏi phân tích:**
-- Scores có consistent giữa 2 frameworks không? → Xu hướng giống nhau (cùng phát hiện hallucination/lạc đề) nhưng thang tuyệt đối khác vì công thức/threshold khác.
-- Framework nào strict hơn? → DeepEval thường strict hơn nhờ assertion pass/fail + metric safety; RAGAS cho điểm liên tục, dễ "qua" hơn nếu threshold lỏng.
-- Failure cases có giống nhau không? → Có: cả hai đều đánh trượt adversarial (A01–A03) và các hard case thiếu grounding.
+**Câu hỏi phân tích (số liệu thật):**
+- **Scores có consistent không?** → **Agreement rate 90%** (18/20 case cùng verdict pass/fail).
+  Thang tuyệt đối khác (DeepEval-style cho điểm nhỉnh hơn vì similarity tính cả từ chung như
+  stopword) nhưng *kết luận* gần như trùng.
+- **Framework nào strict hơn?** → **DeepEval-style** (pass rate 5% < 15%). Vì nó chấm theo
+  **chuỗi ký tự liên tiếp**: answer phải khớp *trật tự* mới điểm cao, khó hơn so với chỉ cần
+  trùng *tập từ* của RAGAS-style.
+- **Failure cases có giống nhau không?** → **17 case cả hai cùng trượt** (gồm toàn bộ adversarial
+  A01–A03 và hầu hết hard/medium). DeepEval-style trượt **thêm E03, M05** — 2 case RAGAS-style
+  cho qua nhưng DeepEval-style đánh rớt do khác biệt thứ tự từ. Không case nào chỉ RAGAS trượt.
 
 ---
 
@@ -307,8 +320,25 @@ See `reflection.md`
 
 ---
 
+## Bonus Deliverables (đã hoàn thành cả 3) ✅
+
+| Bonus | Điểm | Sản phẩm | Cách chạy |
+|-------|------|----------|-----------|
+| **CI/CD integration** | +5 | [.github/workflows/eval.yml](.github/workflows/eval.yml) + [scripts/eval_gate.py](scripts/eval_gate.py) | `python scripts/eval_gate.py` (exit 0) · `python scripts/eval_gate.py bad` (exit 1 = chặn deploy) |
+| **Custom metric** | +5 | `RAGASEvaluator.evaluate_f1` — token-level F1 (chuẩn SQuAD, cân bằng precision+recall) + test [tests/test_bonus.py](tests/test_bonus.py) | `pytest tests/test_bonus.py -v` |
+| **Framework comparison** | +10 | [scripts/compare_frameworks.py](scripts/compare_frameworks.py) → [reports/framework_comparison.json](reports/framework_comparison.json) (xem Exercise 3.4) | `python scripts/compare_frameworks.py` |
+
+- **CI/CD:** workflow chạy `pytest` → reproduce benchmark (upload artifact) → **quality gate**.
+  Gate dùng `overall_score` + sàn faithfulness; agent kém → job đỏ → **không cho merge/deploy**
+  (đúng tinh thần "eval = unit test"). Ngưỡng calibrate theo heuristic lexical, thấp hơn ngưỡng
+  semantic ở Exercise 1.3 — lý do nêu ở `reflection.md` §8.
+- **Custom metric F1:** vì 3 metric cốt lõi chấm overlap *một chiều*, F1 cân cả hai phía nên
+  phạt được answer "đúng nhưng dài lê thê" (test `test_penalises_bloated_answer`).
+
+---
+
 ## Submission Checklist
-- [x] All tests pass: `pytest tests/ -v` (39/39)
+- [x] All tests pass: `pytest tests/ -v` (45/45 — gồm 6 test bonus)
 - [x] `overall_score` implemented
 - [x] `run_regression` implemented
 - [x] `generate_improvement_log` implemented

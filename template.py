@@ -203,6 +203,37 @@ class RAGASEvaluator:
         return max(0.0, min(1.0, overlap / len(expected_tokens)))
 
     # -----------------------------------------------------------------------
+    # BONUS — Custom metric: token-level F1 (beyond the 3 core metrics)
+    # -----------------------------------------------------------------------
+    def evaluate_f1(self, answer: str, expected: str) -> float:
+        """Token-level F1 between answer and expected (the standard SQuAD QA metric).
+
+        The three core metrics are ONE-SIDED overlap (each divides by a single
+        denominator). F1 balances BOTH sides:
+
+            precision = |answer ∩ expected| / |answer|     (penalises padding/noise)
+            recall    = |answer ∩ expected| / |expected|   (penalises missing info)
+            F1        = 2·P·R / (P + R)
+
+        So an answer that is correct but bloated (high recall, low precision) or
+        terse but incomplete (high precision, low recall) is scored fairly, unlike
+        the one-sided completeness metric. Returns 1.0 if both are empty, 0.0 if no
+        overlap or exactly one side is empty.
+        """
+        answer_tokens = _tokenize(answer)
+        expected_tokens = _tokenize(expected)
+        if not answer_tokens and not expected_tokens:
+            return 1.0
+        if not answer_tokens or not expected_tokens:
+            return 0.0
+        overlap = len(answer_tokens & expected_tokens)
+        if overlap == 0:
+            return 0.0
+        precision = overlap / len(answer_tokens)
+        recall = overlap / len(expected_tokens)
+        return max(0.0, min(1.0, 2 * precision * recall / (precision + recall)))
+
+    # -----------------------------------------------------------------------
     # Task 2b — Retrieval-side metrics (evaluate the GET-CONTEXT step)
     # -----------------------------------------------------------------------
     # From lecture (RAG pipeline): Context Recall → Context Precision →

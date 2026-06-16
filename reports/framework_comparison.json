@@ -1,0 +1,44 @@
+{
+  "dataset_size": 20,
+  "pass_threshold": 0.5,
+  "ragas": {
+    "avg_faithfulness": 0.318,
+    "avg_relevance": 0.266,
+    "avg_completeness": 0.689,
+    "pass_rate": 0.15
+  },
+  "deepeval": {
+    "avg_faithfulness": 0.447,
+    "avg_relevance": 0.352,
+    "avg_completeness": 0.762,
+    "pass_rate": 0.05
+  },
+  "failure_overlap": {
+    "both_fail": [
+      "E01",
+      "E04",
+      "E05",
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M06",
+      "M07",
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "only_ragas_fail": [],
+    "only_deepeval_fail": [
+      "E03",
+      "M05"
+    ],
+    "agreement_rate": 0.9
+  },
+  "stricter_framework": "DeepEval-style"
+}
