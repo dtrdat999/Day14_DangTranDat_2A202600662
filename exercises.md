@@ -171,7 +171,7 @@ từ pipeline.
 | M06 | LLM-as-Judge | 0.40 | 0.50 | 1.00 | 0.63 | ❌ | off_topic |
 | M07 | offline vs online | 0.42 | 0.60 | 1.00 | 0.67 | ❌ | off_topic |
 | H01 | RAG or fine-tuning | 0.20 | 0.12 | 0.31 | 0.21 | ❌ | hallucination |
-| H02 | chunk size/overlap | 0.00 | 0.00 | 0.24 | 0.08 | ❌ | hallucination |
+| H02 | chunk size/overlap | 0.00 | 0.00 | 0.23 | 0.08 | ❌ | hallucination |
 | H03 | top-k hurt quality | 0.57 | 0.38 | 0.50 | 0.48 | ❌ | off_topic |
 | H04 | bias in LLM judge | 0.17 | 0.00 | 0.38 | 0.18 | ❌ | hallucination |
 | H05 | CI/CD threshold | 0.17 | 0.00 | 0.35 | 0.17 | ❌ | hallucination |
