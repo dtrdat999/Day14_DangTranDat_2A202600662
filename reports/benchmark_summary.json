@@ -1,0 +1,301 @@
+{
+  "domain": "AI/ML & RAG assistant",
+  "dataset_size": 20,
+  "note": "Subset benchmark of 20 cases for the individual exercise (full Lab 14 team deliverable would use 50+ cases).",
+  "report": {
+    "total": 20,
+    "passed": 3,
+    "pass_rate": 0.15,
+    "avg_faithfulness": 0.3175721500721501,
+    "avg_relevance": 0.2658333333333333,
+    "avg_completeness": 0.6887867647058823,
+    "failure_types": {
+      "irrelevant": 1,
+      "hallucination": 12,
+      "off_topic": 4
+    }
+  },
+  "stats": {
+    "faithfulness": {
+      "avg": 0.318,
+      "min": 0.0,
+      "max": 0.8,
+      "std": 0.263
+    },
+    "relevance": {
+      "avg": 0.266,
+      "min": 0.0,
+      "max": 0.667,
+      "std": 0.216
+    },
+    "completeness": {
+      "avg": 0.689,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.399
+    },
+    "overall": {
+      "avg": 0.424,
+      "min": 0.0,
+      "max": 0.767,
+      "std": 0.264
+    }
+  },
+  "per_question": [
+    {
+      "id": "E01",
+      "difficulty": "easy",
+      "faithfulness": 0.8,
+      "relevance": 0.25,
+      "completeness": 1.0,
+      "overall": 0.683,
+      "passed": false,
+      "failure_type": "irrelevant"
+    },
+    {
+      "id": "E02",
+      "difficulty": "easy",
+      "faithfulness": 0.667,
+      "relevance": 0.5,
+      "completeness": 1.0,
+      "overall": 0.722,
+      "passed": true,
+      "failure_type": null
+    },
+    {
+      "id": "E03",
+      "difficulty": "easy",
+      "faithfulness": 0.8,
+      "relevance": 0.5,
+      "completeness": 1.0,
+      "overall": 0.767,
+      "passed": true,
+      "failure_type": null
+    },
+    {
+      "id": "E04",
+      "difficulty": "easy",
+      "faithfulness": 0.167,
+      "relevance": 0.333,
+      "completeness": 1.0,
+      "overall": 0.5,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "E05",
+      "difficulty": "easy",
+      "faithfulness": 0.167,
+      "relevance": 0.333,
+      "completeness": 1.0,
+      "overall": 0.5,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "M01",
+      "difficulty": "medium",
+      "faithfulness": 0.222,
+      "relevance": 0.2,
+      "completeness": 1.0,
+      "overall": 0.474,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "M02",
+      "difficulty": "medium",
+      "faithfulness": 0.2,
+      "relevance": 0.4,
+      "completeness": 1.0,
+      "overall": 0.533,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "M03",
+      "difficulty": "medium",
+      "faithfulness": 0.636,
+      "relevance": 0.333,
+      "completeness": 1.0,
+      "overall": 0.657,
+      "passed": false,
+      "failure_type": "off_topic"
+    },
+    {
+      "id": "M04",
+      "difficulty": "medium",
+      "faithfulness": 0.2,
+      "relevance": 0.2,
+      "completeness": 1.0,
+      "overall": 0.467,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "M05",
+      "difficulty": "medium",
+      "faithfulness": 0.571,
+      "relevance": 0.667,
+      "completeness": 1.0,
+      "overall": 0.746,
+      "passed": true,
+      "failure_type": null
+    },
+    {
+      "id": "M06",
+      "difficulty": "medium",
+      "faithfulness": 0.4,
+      "relevance": 0.5,
+      "completeness": 1.0,
+      "overall": 0.633,
+      "passed": false,
+      "failure_type": "off_topic"
+    },
+    {
+      "id": "M07",
+      "difficulty": "medium",
+      "faithfulness": 0.417,
+      "relevance": 0.6,
+      "completeness": 1.0,
+      "overall": 0.672,
+      "passed": false,
+      "failure_type": "off_topic"
+    },
+    {
+      "id": "H01",
+      "difficulty": "hard",
+      "faithfulness": 0.2,
+      "relevance": 0.125,
+      "completeness": 0.312,
+      "overall": 0.212,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "H02",
+      "difficulty": "hard",
+      "faithfulness": 0.0,
+      "relevance": 0.0,
+      "completeness": 0.235,
+      "overall": 0.078,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "H03",
+      "difficulty": "hard",
+      "faithfulness": 0.571,
+      "relevance": 0.375,
+      "completeness": 0.5,
+      "overall": 0.482,
+      "passed": false,
+      "failure_type": "off_topic"
+    },
+    {
+      "id": "H04",
+      "difficulty": "hard",
+      "faithfulness": 0.167,
+      "relevance": 0.0,
+      "completeness": 0.375,
+      "overall": 0.181,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "H05",
+      "difficulty": "hard",
+      "faithfulness": 0.167,
+      "relevance": 0.0,
+      "completeness": 0.353,
+      "overall": 0.173,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "A01",
+      "difficulty": "adversarial",
+      "faithfulness": 0.0,
+      "relevance": 0.0,
+      "completeness": 0.0,
+      "overall": 0.0,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "A02",
+      "difficulty": "adversarial",
+      "faithfulness": 0.0,
+      "relevance": 0.0,
+      "completeness": 0.0,
+      "overall": 0.0,
+      "passed": false,
+      "failure_type": "hallucination"
+    },
+    {
+      "id": "A03",
+      "difficulty": "adversarial",
+      "faithfulness": 0.0,
+      "relevance": 0.0,
+      "completeness": 0.0,
+      "overall": 0.0,
+      "passed": false,
+      "failure_type": "hallucination"
+    }
+  ],
+  "failure_categories": {
+    "irrelevant": 1,
+    "hallucination": 12,
+    "off_topic": 4
+  },
+  "improvement_suggestions": [
+    "Implement a hallucination checker to filter unsupported claims and tighten faithfulness guardrails",
+    "Strengthen intent routing so queries reach the correct knowledge base",
+    "Improve prompt clarity and intent detection so answers address the question asked"
+  ],
+  "improvement_log": "| Failure ID | Type | Root Cause | Suggested Fix | Status |\n|------------|------|------------|---------------|--------|\n| F001 | hallucination | Multiple issues detected — review full pipeline | Implement a hallucination checker to filter unsupported claims and tighten faithfulness guardrails | Open |\n| F002 | hallucination | Multiple issues detected — review full pipeline | Strengthen intent routing so queries reach the correct knowledge base | Open |\n| F003 | hallucination | Multiple issues detected — review full pipeline | Improve prompt clarity and intent detection so answers address the question asked | Open |",
+  "exercise_3_5": {
+    "rows": [
+      {
+        "id": "R01",
+        "recall": 1.0,
+        "precision_before": 0.583,
+        "precision_after": 0.833,
+        "delta": 0.25
+      },
+      {
+        "id": "R02",
+        "recall": 0.8,
+        "precision_before": 0.5,
+        "precision_after": 1.0,
+        "delta": 0.5
+      },
+      {
+        "id": "R03",
+        "recall": 1.0,
+        "precision_before": 0.833,
+        "precision_after": 1.0,
+        "delta": 0.167
+      },
+      {
+        "id": "R04",
+        "recall": 0.571,
+        "precision_before": 0.5,
+        "precision_after": 1.0,
+        "delta": 0.5
+      },
+      {
+        "id": "R05",
+        "recall": 0.625,
+        "precision_before": 0.333,
+        "precision_after": 1.0,
+        "delta": 0.667
+      }
+    ],
+    "avg": {
+      "recall": 0.799,
+      "precision_before": 0.55,
+      "precision_after": 0.967
+    }
+  }
+}
