@@ -2,6 +2,11 @@
 
 **AICB-P1 · Phase 1 · Ngày 14 trong 15**
 
+> **Sinh viên:** Đặng Trần Đạt — MSSV 2A202600662
+> **Ngày nộp:** 2026-06-16 · **Domain:** AI/ML & RAG assistant
+> **Trạng thái:** ✅ Hoàn thành — `pytest tests/ -v` → **45/45 passed** · đã làm cả 3 bonus.
+> Xem [Cách chạy & Bonus](#cách-chạy--bonus-đã-hoàn-thành) ở cuối file.
+
 ---
 
 ## Mục tiêu
@@ -233,4 +238,34 @@ pytest tests/ -v
 - Chạy 2 frameworks khác nhau trên cùng dataset và so sánh scores (+10)
 - Tích hợp evaluation vào CI/CD script (GitHub Actions hoặc tương tự) (+5)
 - Thêm custom metric ngoài 3 metrics cơ bản (+5)
-# Day_14_RAG_Evaluation
+
+---
+
+## Cách chạy & Bonus (đã hoàn thành)
+
+> Bài dùng **word-overlap heuristic** thay cho LLM thật → chạy hoàn toàn **offline,
+> KHÔNG cần API key**, kết quả deterministic và reproducible.
+
+### Chạy & kiểm thử
+```bash
+python -m pytest tests/ -v             # 45/45 passed (39 gốc + 6 test bonus)
+python scripts/run_benchmark_demo.py   # benchmark 20 QA -> reports/benchmark_summary.json
+python scripts/eval_gate.py            # CI quality gate: agent tốt -> exit 0 (deploy allowed)
+python scripts/eval_gate.py bad        # agent kém -> exit 1 (deploy blocked)
+python scripts/compare_frameworks.py   # so sánh framework -> reports/framework_comparison.json
+```
+
+### Sản phẩm nộp
+- [`solution/solution.py`](solution/solution.py) — triển khai đầy đủ (bản sao `template.py`)
+- [`exercises.md`](exercises.md) — golden dataset 20 QA + benchmark + rubric + Exercise 3.5
+- [`reflection.md`](reflection.md) — 3 failures (5 Whys) + clustering + improvement log + CI/CD + Limitations
+
+### Bonus đã làm (+20)
+| Bonus | Điểm | Sản phẩm |
+|-------|------|----------|
+| Framework comparison (RAGAS-style vs DeepEval-style, offline) | +10 | `scripts/compare_frameworks.py` → `reports/framework_comparison.json` (xem Exercise 3.4) |
+| CI/CD quality gate | +5 | `.github/workflows/eval.yml` + `scripts/eval_gate.py` |
+| Custom metric (token-level F1, chuẩn SQuAD) | +5 | `RAGASEvaluator.evaluate_f1` + `tests/test_bonus.py` |
+
+> Mọi con số trong `exercises.md` / `reflection.md` sinh từ `scripts/run_benchmark_demo.py`
+> (và `compare_frameworks.py`) — chạy lại để kiểm chứng.
